@@ -1,29 +1,25 @@
-
-from email import generator
-from tkinter import *
 import random
+from tkinter import *
 import string
+from tkinter.font import Font
 
-root = Tk()
-root.geometry("400x200")
+def generate_password():
+  password=[]
+  for i in range(2):
+    alpha=random.choice(string.ascii_letters)
+    symbol=random.choice(string.punctuation)
+    numbers=random.choice(string.digits)
+    password.append(alpha)
+    password.append(symbol)
+    password.append(numbers)
+  y="".join(str(x)for x in password)
+  lbl.config(text=y)
 
-passstr = StringVar()
-pwd_len = IntVar()
-
-# function to generate the password
-def get_pass():
-    pass1 = string.ascii_letters + string.digits + string.punctuation
-    password = ""
-
-    for x in range(pwd_len.get()): #loop to generate the user given length for password
-        password = password + random.choice(pass1)
-    passstr.set(password)
-
-#tkinter command to generate the gui    
-Label(root, text="Password Generator", font="calibri 18 bold").pack()
-Label(root, text="Enter length of Password").pack(pady=9)
-Entry(root, textvariable=pwd_len).pack(pady=2)
-Button(root, text="Generate Password", command=generator).pack(pady=15)
-Entry(root, textvariable=passstr).pack(pady=2)
-
+root=Tk()
+root.geometry("250x200")
+btn=Button(root,text="Generate Password",command=generate_password)
+btn.place(relx=0.5, rely=0.2, anchor=N)
+myFont = Font(family="Times New Roman", size=12)
+lbl=Label(root,font=myFont)
+lbl.place(relx=0.5, rely=0.5, anchor=CENTER)
 root.mainloop()
